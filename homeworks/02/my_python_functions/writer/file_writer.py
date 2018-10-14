@@ -54,13 +54,12 @@ class FileWriter:
                 file.close()
 
     def write(self, some_string):
-        with open(self.path, 'a') as file:
-            file.write(some_string)
+        self.file.write(some_string)
 
     def save_yourself(self, file_name):
-        file = open(file_name, 'wb')
-        pkl.dump(FileWriter(self.path), file)
-        file.close()
+        self.file = None
+        with open(file_name, 'wb') as file:
+            pkl.dump(self, file)
 
 
     @classmethod
