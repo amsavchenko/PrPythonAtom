@@ -1,4 +1,4 @@
-from project_movie_recommendations import find_neighbours, name_list, link_list
+from project_movie_recommendations import find_neighbours, name_list, link_list, return_id_from_title
 
 from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
 
@@ -22,7 +22,6 @@ def help():
 @app.route('/get_recommendation/<id>', methods=['GET'])
 def get_recommendation(id):
     title = get_flashed_messages()[0]
-    # title = imdb.get_movie(id).get('title')
     neighbours = find_neighbours(id)
     return render_template('recommendation_page.html', title=title, id_list1=neighbours[:len(neighbours)//2],
                            id_list2=neighbours[len(neighbours)//2:], name_list=name_list, link_list=link_list)
